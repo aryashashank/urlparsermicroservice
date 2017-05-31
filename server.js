@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var url = require('url');
 
+app.get('/', function(){
+	res.end("Go to /whoami");
+});
 app.get('/whoami', function(req, res){
 
 	var ip = req.headers['x-forwarded-for'] || 
@@ -16,6 +19,6 @@ app.get('/whoami', function(req, res){
      res.send(info);
 
 });
-app.listen(8080, function(){
-	console.log("Listening on 8080.");
-})
+app.listen(process.env.PORT || 8080, function(){
+	console.log("Listening on port %d",process.env.PORT || 8080);
+});
